@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>ATLAS — Spatial Intelligence</title>
+<link rel="stylesheet" href="css/atlas.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/three.module.js",
+    "three/addons/": "./vendor/three/addons/"
+  }
+}
+</script>
+</head>
+<body>
+
+  <!-- Full-screen WebGL canvas host -->
+  <div id="scene" aria-label="ATLAS spatial environment"></div>
+  <div id="grid-overlay"></div>
+
+  <!-- Orientation state / top center HUD -->
+  <header id="hud-top">
+    <div id="brand">ATLAS<span class="dim">·CORE</span></div>
+    <div id="orientation-badge">
+      <span class="okey">FACING</span>
+      <span id="orientation-name">MARKET</span>
+    </div>
+    <div id="system-line">
+      <span class="dot" id="sys-provider-dot"></span>
+      <span id="sys-line-text">initializing…</span>
+    </div>
+  </header>
+
+  <!-- Left: broker / data system object (not a card) -->
+  <nav id="broker-rail" aria-label="Broker system">
+    <div id="broker-object" role="button" tabindex="0" title="Configure broker connection">
+      <div class="broker-glow" id="broker-glow"></div>
+      <div class="broker-line broker-broker">BROKER</div>
+      <div class="broker-line" id="broker-name">—</div>
+      <div class="broker-line" id="broker-status">NOT CONNECTED</div>
+      <div class="broker-line broker-sub" id="broker-sub">cTrader / MT5</div>
+      <div class="broker-line broker-balance" id="broker-balance"></div>
+      <button id="broker-connect-btn" class="sys-btn">CONNECT</button>
+    </div>
+
+    <div id="api-indicators" aria-label="data sources">
+      <div class="api-ind"><span class="dot" data-src="news"></span><span>NEWS</span></div>
+      <div class="api-ind"><span class="dot" data-src="cot"></span><span>COT</span></div>
+      <div class="api-ind"><span class="dot" data-src="calendar"></span><span>CALENDAR</span></div>
+      <div class="api-ind"><span class="dot" data-src="market"></span><span>MARKET</span></div>
+    </div>
+  </nav>
+
+  <!-- Right: engine presence rail (nodes) -->
+  <aside id="engine-rail" aria-label="engine systems"></aside>
+
+  <!-- Reusable detail panel (expands from any spatial object) -->
+  <section id="panel" class="atlas-panel hidden">
+    <button id="panel-close" class="panel-close" title="retract">✕</button>
+    <div id="panel-title"></div>
+    <div id="panel-subtitle" class="panel-subtitle"></div>
+    <div id="panel-body"></div>
+  </section>
+
+  <!-- Floating broker configuration modal -->
+  <section id="broker-modal" class="atlas-modal hidden">
+    <button id="broker-modal-close" class="panel-close" title="close">✕</button>
+    <div class="modal-title">BROKER · GATEWAY</div>
+    <form id="broker-form" autocomplete="off">
+      <label>Provider
+        <select id="bf-provider">
+          <option value="CTRADER">cTrader Open API</option>
+          <option value="PAPER">Paper (simulated)</option>
+        </select>
+      </label>
+      <label>Client ID
+        <input id="bf-client-id" type="text" placeholder="Open API client id" />
+      </label>
+      <label>Client Secret
+        <input id="bf-client-secret" type="password" placeholder="client secret" />
+      </label>
+      <label>Account ID
+        <input id="bf-account-id" type="text" placeholder="account number / id" />
+      </label>
+      <label>Access Token (optional)
+        <input id="bf-token" type="password" placeholder="access token" />
+      </label>
+      <label>Environment
+        <select id="bf-env"><option value="DEMO">DEMO</option><option value="LIVE">LIVE</option></select>
+      </label>
+      <label>Host (optional)
+        <input id="bf-host" type="text" placeholder="demo.ctraderapi.com" />
+      </label>
+      <label class="row"><span>Set as default</span><input id="bf-default" type="checkbox" /></label>
+      <div class="modal-actions">
+        <button type="button" id="bf-test" class="sys-btn">TEST CONNECTION</button>
+        <button type="submit" id="bf-save" class="sys-btn primary">ADD &amp; CONNECT</button>
+      </div>
+      <div id="bf-result" class="bf-result"></div>
+    </form>
+    <div id="broker-account-list"></div>
+  </section>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

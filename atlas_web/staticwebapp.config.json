@@ -1,0 +1,16 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/css/*", "/js/*", "/vendor/*", "*.{css,js,map,json,html,svg,png,ico,woff2}"]
+  },
+  "mimeTypes": {
+    ".js": "text/javascript",
+    ".mjs": "text/javascript",
+    ".json": "application/json",
+    ".css": "text/css",
+    ".html": "text/html; charset=utf-8"
+  },
+  "globalHeaders": {
+    "cache-control": "no-cache, must-revalidate"
+  }
+}
